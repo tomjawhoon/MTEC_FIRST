@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/fontawesome.min.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<title>LOGIN SOS</title>
+</head>
+<body>
+    <script>
+        // This is called with the results from from FB.getLoginStatus().
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+            // The response object is returned with a status field that lets the
+            // app know the current login status of the person.
+            // Full docs on the response object can be found in the documentation
+            // for FB.getLoginStatus().
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                testAPI();
+            } else {
+                // The person is not logged into your app or we are unable to tell.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                    'into this app.';
+            }
+        }
+        // This function is called when someone finishes with the Login
+        // Button.  See the onlogin handler attached to it in the sample
+        // code below.
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        }
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '380253062811198',
+                cookie     : true,  // enable cookies to allow the server to access
+                                    // the session
+                xfbml      : true,  // parse social plugins on this page
+                version    : 'v3.1' // The Graph API version to use for the call
+            });
+            // Now that we've initialized the JavaScript SDK, we call
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        };
+        // Load the SDK asynchronously
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        // Here we run a very simple test of the Graph API after login is
+        // successful.  See statusChangeCallback() for when this call is made.
+        function testAPI() {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+                console.log('Successful login for: ' + response.name);
+                document.getElementById('status').innerHTML =
+                    'Thanks for logging in, ' + response.name + '!';
+            });
+        }
+    </script>
+    
+    <script>
+        function getMe() {
+            FB.api('/me', function (response) {
+                console.log(JSON.stringify(response));
+                document.getElementById('status').innerHTML = JSON.stringify(response);
+            });
+        }
+        function logout() {
+            FB.logout(function(response) {
+               console.log('Logout')
+                document.getElementById('status').innerHTML =
+                    'Thanks for logging out!';
+            });
+        }
+    </script>
+    
+    <!--
+      Below we include the Login Button social plugin. This button uses
+      the JavaScript SDK to present a graphical Login button that triggers
+      the FB.login() function when clicked.
+    -->
+    
+    
+<!-- <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCUwx2G-IUhbgYtGfUOUO7EQA_q8Z-lshk",
+      authDomain: "facebook-a1867.firebaseapp.com",
+      databaseURL: "https://facebook-a1867.firebaseio.com",
+      projectId: "facebook-a1867",
+      storageBucket: "facebook-a1867.appspot.com",
+      messagingSenderId: "1071441041285",
+      appId: "1:1071441041285:web:d5c81c79b2409d4e"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(Config);
+    // var provider = new firebase.auth.FacebookAuthProvider();
+    // provider.addScope('user_birthday');
+    //   function loginFaceBook(){
+    //       firebase.auth().signInWithPopup(provider)
+    //       .then(function(result){
+    //         var token = result.credential.accessToken;
+    //         var user  = result.user;
+    //         console.log("55555555")
+    //         console.log(token);
+    //         console.log(user);
+    //     }).catch(function(error){
+    //         console.log(error.code);
+    //         console.log(error.message);
+    //     });
+    //   } -->
+  </script>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">MTEC</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                  <div class="navbar-nav">
+                    <!-- <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a> -->
+                    <a class="nav-item nav-link" href="about.html">about</a>
+                    <a class="nav-item nav-link" href="Features.html">Features</a>
+                    <a class="nav-item nav-link" href="Bluetoots.html">Blue</a>
+                    <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                  </div>
+                </div>
+              </nav>
+              <br>
+              <h1>SOS BUTTON</h1>
+              <div class="container text-center" >
+                
+              <p class="lead">Welcome</p>
+              <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>
+    
+    <div id="status">
+    </div>
+    <!-- <button onClick="getMe()" >Get Me </button>
+    <button onClick="logout()" >Logout</button> -->
+        
+  
+
+      
+<!-- 
+
+                    <div class="row"> 
+                        <div class="col-md-4">
+                            <div class="well"> 
+                                <i class="fa fa-dizzy"></i>
+                                   <h3>TOP TEACHNOLOGY</h3>
+                                    <p>good good good goodgood goodgood goodgood good good goodgood goodgood good
+                                            good good good goodgood goodgood goodgood good good goodgood goodgood good
+                                    </p>
+                            </div>
+                         </div>
+                    </div>
+
+                    <div class="row">  
+                         <div class="col-md-4"> 
+                            <div class="well">  
+                                    <i class="fa fa-user"></i>
+                                    <h3>TOP TEACHNOLOGY</h3>
+                                    <p>good good </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row"> 
+                        <div class="col-md-4"> 
+                            <div class="well"> 
+
+                                    <i class="fa fa-grin"></i>
+                                   <h3>TOP TEACHNOLOGY</h3>
+                                    <p>good good </p>
+                             </div>
+                        </div>
+                    </div>
+                </div> -->
+              <!-- </div> -->
+<!-- <div class="app">
+<h1>Bluetooth</h1>
+        <div id="mainPage">
+        <ul id="deviceList">
+        </ul>
+            <button id="refreshButton" class ="styled-button-9">Get Your Bluetooth Devices</button>
+        </div>
+        <br>
+        <br>
+       
+</div> -->
+<footer><p class="text-center">Copyright &copy; MTEC </p></footer>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">app.initialize();</script>
+       
+</body>
+</html>
